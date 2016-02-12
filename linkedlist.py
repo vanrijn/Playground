@@ -1,3 +1,5 @@
+import unittest
+
 class LinkedListNode:
 	def __init__(self, value):
 		self._value = value
@@ -34,6 +36,18 @@ class LinkedList:
 
 		self._lastNode = node
 		self._size += 1
+
+	def size(self):
+		return self._size
+
+	def count(self):
+		numNodes = 0
+		node = self._rootNode
+		while node is not None:
+			numNodes += 1
+			node = node.childNode()
+
+		return numNodes
 
 	def print_all(self):
 		print "My size is: %d" % self._size
@@ -96,18 +110,23 @@ list.push_back(4)
 list.push_back(5)
 list.push_back("egg")
 list.print_all()
+assert list.size() == 6 and list.count() == 6
 print
 
 print "Trying to remove something not in the list..."
 list.remove("something not in the list")
 list.print_all()
+assert list.size() == 6 and list.count() == 6
 print
 
 print "Removing first node (1)"
 list.remove(1)
 list.print_all()
+assert list.size() == 5 and list.count() == 5
 print
 
 print "Removing middle node (4)"
 list.remove(4)
 list.print_all()
+assert list.size() == 4 and list.count() == 4
+
