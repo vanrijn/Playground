@@ -1,99 +1,100 @@
-import unittest
-
 class LinkedListNode:
-	def __init__(self, value):
-		self._value = value
-		self._childNode = None
-		print "Hi there! I'm a LinkedListNode and my value is: %s" % value
 
-	def childNode(self):
-		return self._childNode
+    def __init__(self, value):
+        self._value = value
+        self._childNode = None
+        print "Hi there! I'm a LinkedListNode and my value is: %s" % value
 
-	def setChildNode(self, node):
-		self._childNode = node
+    def childNode(self):
+        return self._childNode
 
-	def value(self):
-		return self._value
+    def setChildNode(self, node):
+        self._childNode = node
 
-	def setValue(self, value):
-		self._value = value
+    def value(self):
+        return self._value
+
+    def setValue(self, value):
+        self._value = value
+
 
 class LinkedList:
-	def __init__(self):
-		self._rootNode = None
-		self._lastNode = None
-		self._size = 0
 
-	def push_back(self, value):
-		node = LinkedListNode(value)
+    def __init__(self):
+        self._rootNode = None
+        self._lastNode = None
+        self._size = 0
 
-		# If this is the first time adding a node, this will be our rootNode.
-		# Otherwise, set rootNode to be the parentNode
-		if self._rootNode is None:
-			self._rootNode = node
-		else:
-			self._lastNode.setChildNode(node)
+    def push_back(self, value):
+        node = LinkedListNode(value)
 
-		self._lastNode = node
-		self._size += 1
+        # If this is the first time adding a node, this will be our rootNode.
+        # Otherwise, set rootNode to be the parentNode
+        if self._rootNode is None:
+            self._rootNode = node
+        else:
+            self._lastNode.setChildNode(node)
 
-	def size(self):
-		return self._size
+        self._lastNode = node
+        self._size += 1
 
-	def count(self):
-		numNodes = 0
-		node = self._rootNode
-		while node is not None:
-			numNodes += 1
-			node = node.childNode()
+    def size(self):
+        return self._size
 
-		return numNodes
+    def count(self):
+        numNodes = 0
+        node = self._rootNode
+        while node is not None:
+            numNodes += 1
+            node = node.childNode()
 
-	def print_all(self):
-		print "My size is: %d" % self._size
-		node = self._rootNode
-		while node is not None:
-			print "Node value: %s" % str(node.value())
-			node = node.childNode()
+        return numNodes
 
-	def remove(self, value):
-		if self._size == 0:
-			print "Can't remove value %s. I'm empty" % str(value)
-			return
+    def print_all(self):
+        print "My size is: %d" % self._size
+        node = self._rootNode
+        while node is not None:
+            print "Node value: %s" % str(node.value())
+            node = node.childNode()
 
-		if self._size == 1:
-			self._rootNode.setValue(None)
-			return
+    def remove(self, value):
+        if self._size == 0:
+            print "Can't remove value %s. I'm empty" % str(value)
+            return
 
-		node = self._rootNode
-		parentNode = None
+        if self._size == 1:
+            self._rootNode.setValue(None)
+            return
 
-		while node is not None:
-			if node.value() == value:
-				print "Found node."
-				break
+        node = self._rootNode
+        parentNode = None
 
-			parentNode = node
-			node = node.childNode()
+        while node is not None:
+            if node.value() == value:
+                print "Found node."
+                break
 
-		# We can only remove a node if we found one
-		if node is None or node.value() != value:
-			print "Sorry, couldn't remove value: %s (not found)" % str(value)
-			return
+            parentNode = node
+            node = node.childNode()
 
-		nextNode = node.childNode()
+        # We can only remove a node if we found one
+        if node is None or node.value() != value:
+            print "Sorry, couldn't remove value: %s (not found)" % str(value)
+            return
 
-		# If we're removing our root node, update it to be the next node
-		if parentNode is None:
-			print ("Removing root node %s and updating to new node: %s" %
-			       (str(self._rootNode.value()), str(nextNode.value())))
-			self._rootNode = nextNode
-		else:
-			print ("Parent node: %s, now joining to new child node: %s" %
-			       (str(parentNode.value()), str(nextNode.value())))
-			parentNode.setChildNode(nextNode)
+        nextNode = node.childNode()
 
-		self._size -= 1
+        # If we're removing our root node, update it to be the next node
+        if parentNode is None:
+            print("Removing root node %s and updating to new node: %s" %
+                  (str(self._rootNode.value()), str(nextNode.value())))
+            self._rootNode = nextNode
+        else:
+            print("Parent node: %s, now joining to new child node: %s" %
+                  (str(parentNode.value()), str(nextNode.value())))
+            parentNode.setChildNode(nextNode)
+
+        self._size -= 1
 
 
 list = LinkedList()
@@ -133,4 +134,3 @@ list.remove(4)
 list.print_all()
 expected = 4
 assert list.size() == expected and list.count() == expected
-
