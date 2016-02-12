@@ -110,23 +110,27 @@ list.push_back(4)
 list.push_back(5)
 list.push_back("egg")
 list.print_all()
-assert list.size() == 6 and list.count() == 6
+expected = 6
+assert list.size() == expected and list.count() == expected
 print
 
 print "Trying to remove something not in the list..."
 list.remove("something not in the list")
 list.print_all()
-assert list.size() == 6 and list.count() == 6
+expected = 6
+assert list.size() == expected and list.count() == expected
 print
 
 print "Removing first node (1)"
 list.remove(1)
 list.print_all()
-assert list.size() == 5 and list.count() == 5
+expected = 5
+assert list.size() == expected and list.count() == expected
 print
 
 print "Removing middle node (4)"
 list.remove(4)
 list.print_all()
-assert list.size() == 4 and list.count() == 4
+expected = 4
+assert list.size() == expected and list.count() == expected
 
